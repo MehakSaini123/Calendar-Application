@@ -1,0 +1,106 @@
+﻿@model List<Event>
+@{
+    ViewData["Title"] = "Calendar";
+}
+<div id="calendar"></div>
+@* <a asp-action="Create" method =" post">Create New Event</a> *@
+
+
+@* 
+<html>
+<head>
+  <style>
+    .box {
+      width: 300px; /* Set the width of the box */
+      padding: 20px; /* Add padding inside the box */
+            border: 2px solid #f0f0f0; /* Add a border around the box */
+      background-color: #f0f0f0; /* Set the background color of the box */
+    }
+
+    .title {
+      font-size: 20px; /* Set the font size for the title */
+      font-weight: bold; /* Make the title text bold */
+      margin-bottom: 10px; /* Add some spacing below the title */
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+      @foreach (var e in ViewBag.Events as List<Event>)
+{
+        <div class="title"> Title : @e.Title</div>
+        <p>Date: @e.Date.ToShortDateString()</p>
+        <p>@e.Description</p>
+        <p>
+            <a asp-action="Edit" asp-route-id="@e.Id">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@e.Id">Delete</a>
+        </p>
+}
+  </div> *@
+@* </body>
+</html>
+ *@
+
+
+
+@* 
+
+@foreach (var e in ViewBag.Events as List<Event>)
+{
+    <div>
+        <p> Title : @e.Title</p>
+        <p>Date: @e.Date.ToShortDateString()</p>
+        <p>@e.Description</p>
+        <p>
+            <a asp-action="Edit" asp-route-id="@e.Id">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@e.Id">Delete</a>
+        </p>
+    </div>
+} *@
+
+
+@section scripts{
+    <script>
+      /*  document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                events: 'Url.Action("GetEvents")',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                eventClick: function (info) {
+                    info.jsEvent.preventDefault();n
+                    window.location.href = info.event.url;
+                }
+            });
+            calendar.render();*/
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    events: {
+                        url: '/Calendar/GetEvents', // Replace with the actual URL or action method
+                        method: 'GET',
+                    },
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                    },
+                    eventClick: function (info) {
+                        info.jsEvent.preventDefault();
+                       /* window.location.href = info.event.url;*/
+                    }
+                });
+                calendar.render();
+        });
+
+    </script>
+}
+
+
+
+

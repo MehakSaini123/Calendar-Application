@@ -1,0 +1,57 @@
+﻿@model List<Event>
+@{
+    ViewData["Title"] = "ViewEvent";
+}
+
+<h1>Events</h1>
+
+
+<html>
+<head>
+    <style>
+        .box {
+            width: 1320px; /* Set the width of the box */
+            padding: 20px; /* Add padding inside the box */
+            border: 2px solid #f0f0f0; /* Add a border around the box */
+            background-color: #f0f0f0; /* Set the background color of the box */
+        }
+
+        .title {
+            font-size: 20px; /* Set the font size for the title */
+            font-weight: bold; /* Make the title text bold */
+            margin-bottom: 10px; /* Add some spacing below the title */
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        @foreach (var e in ViewBag.Events as List<Event>)
+        {
+            <div class="title"> Title : @e.Title</div>
+            <p>Date: @e.Date.ToShortDateString()</p>
+            <p>@e.Description</p>
+            <p>
+                <a asp-action="Edit" asp-route-id="@e.Id"><button type="button" class="btn btn-primary">Edit</button></a> |
+                <a asp-action="Delete" asp-route-id="@e.Id"><button type="button" class="btn btn-primary">Delete </button></a>
+            </p>
+        }
+    </div>
+</body>
+</html>
+
+
+
+
+@* 
+@foreach (var e in Model)
+{
+    <div>
+        <h3>@e.Title</h3>
+        <p>Date: @e.Date.ToShortDateString()</p>
+        <p>@e.Description</p>
+        <p>
+            <a asp-action="Edit" asp-route-id="@e.Id">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@e.Id">Delete</a>
+        </p>
+    </div>
+} *@
